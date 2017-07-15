@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5E7E9">
+    <RelativeLayout
+        android:id="@+id/rl_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rlprofile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/img_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp"
+                app:civ_shadow_color="@color/colorPrimaryDark"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/img_profile"
+                android:layout_toRightOf="@+id/img_profile"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Name"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:id="@+id/txtUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="email"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_email_verification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlprofile"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:padding="8dp"
+                android:text="@string/email_not_verified"
+                android:textColor="@color/red_btn_bg_color"
+                />
+            <TextView
+                android:id="@+id/txtSendVerificationMail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="8dp"
+                android:text="@string/send_verification_mail"
+                android:textColor="@color/com_facebook_blue"/>
+        </RelativeLayout>
+        <Button
+            android:id="@+id/btnMyRewards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_email_verification"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_background"
+            android:drawableLeft="@drawable/gift"
+            android:text="@string/myrewards"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_background"
+            android:text="@string/sign_out"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnShare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnLogout"
+            android:background="@drawable/button_background"
+            android:layout_centerHorizontal="true"
+            android:text="@string/share"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+</RelativeLayout>

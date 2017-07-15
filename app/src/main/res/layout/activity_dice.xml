@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/dice_bg"
+    tools:context=".games.dice.DiceActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal"
+
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="visible"
+
+            android:layout_marginRight="20dp"
+            android:src="@drawable/dice_2"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:visibility="visible"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/dice_4"/>
+
+    </LinearLayout>
+<TextView
+    android:id="@+id/txtMessage"
+    android:layout_above="@+id/rollDices"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Loading...."
+    android:gravity="center"
+    style="@android:style/TextAppearance.Large"
+    android:textColor="@color/accent"/>
+    <Button
+        android:id="@+id/rollDices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll Dices"
+        android:textSize="20sp"
+        android:enabled="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

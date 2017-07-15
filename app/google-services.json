@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "82134846164",
+    "firebase_url": "https://rewards-40e4b.firebaseio.com",
+    "project_id": "rewards-40e4b",
+    "storage_bucket": "rewards-40e4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82134846164:android:30c2a769fcde308e",
+        "android_client_info": {
+          "package_name": "com.mobilemauj.rewards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82134846164-51294kpbjh92bhnf4ja5li741fr3i5h8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobilemauj.rewards",
+            "certificate_hash": "c86c7b368bf275a640173942aa72b1d7e8896b5b"
+          }
+        },
+        {
+          "client_id": "82134846164-ufa1nm4tjthm9g902a3acnn5u289ia0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAECXJ63Ix9KT8kIPKfdjOw3aaZuRP_MWk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82134846164-ufa1nm4tjthm9g902a3acnn5u289ia0e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- A CardView that contains a TextView -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imgReward"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Amazon ₹1000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="14dp"
+                android:layout_alignBottom="@+id/imgReward"
+                android:layout_toRightOf="@+id/imgReward"
+                android:layout_toEndOf="@+id/imgReward" />
+
+            <LinearLayout
+                android:id="@+id/lltop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_coin" />
+
+                <TextView
+                    android:id="@+id/tv_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="9500"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/points"
+                    android:textSize="12sp"
+
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/lltop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="@string/to_recipient"/>
+
+                <TextView
+                android:id="@+id/txtRequestDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                    android:textSize="16sp"
+
+                    android:text="@string/redeem_date"/>
+                <TextView
+                    android:id="@+id/txtStatus"
+                    android:layout_width="match_parent"
+                    android:textSize="16sp"
+
+                    android:layout_height="wrap_content"
+                    android:text="@string/status"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

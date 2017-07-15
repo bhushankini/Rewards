@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mobilemauj.rewards">
+
+    <application
+        android:name=".MyRewardsApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        tools:replace="android:allowBackup,icon,theme,label"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <meta-data android:name="applovin.sdk.key"
+            android:value="0rv6lEDnVvQLckPB-GsdqIn2Z74mAxuBnoHW0UIWOit0RHCPX22LLpNvwSf5OTG9KXfL1zsPgkQ6_cWXfTu_LG"  />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".SignupActivity"/>
+        <activity android:name=".ForgotPasswordActivity"/>
+        <activity android:name=".MyRewardsActivity"/>
+        <activity android:name=".games.dice.DiceActivity"/>
+        <activity android:name=".games.tictactoe.TicTacToeActivity"/>
+        <activity android:name=".RedeemActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <activity android:name="com.vungle.publisher.VideoFullScreenAdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
+        <activity android:name="com.vungle.publisher.MraidFullScreenAdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
+        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity" />
+        <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+             />
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1334545699916025"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+
+        <receiver
+            android:name=".InstallReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

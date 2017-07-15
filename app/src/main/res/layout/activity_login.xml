@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableRight="@mipmap/ic_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:padding="20dp"
+            android:textStyle="italic"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/app_name"
+            android:textColor="@color/brand_text"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:layout_margin="16dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/email_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Email"
+                android:textColor="@color/colorAccent"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/password_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/colorAccent"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <Button
+                    android:id="@+id/signin_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:background="@color/colorPrimary"
+                    android:tag="custom_login_button"
+                    android:layout_margin="5dp"
+                    android:text="@string/sign_in" />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/button_facebook_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_margin="5dp"
+                    android:textSize="18sp"
+                    android:text="@string/login_with_facebook"
+                    android:layout_centerInParent="true" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtCreateAccount"
+
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+android:layout_gravity="center_horizontal"
+        android:text="No account yet? Create one"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txtForgotPassword"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textAlignment="textEnd"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:text="Forgot Password?"
+        android:textColor="@color/white" />
+</LinearLayout>

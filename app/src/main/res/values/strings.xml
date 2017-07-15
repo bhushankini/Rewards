@@ -1,0 +1,98 @@
+<resources>
+    <string name="app_name">My Rewards</string>
+    <string name="facebook_app_id">509856942688131</string>
+    <string name="fb_login_protocol_scheme">fb509856942688131</string>
+
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="firebase_url">https://myrewards-d26da.firebaseio.com/</string>
+    <string name="loading">Loading..</string>
+    <string name="facebook_status_fmt">Facebook User: %s</string>
+    <string name="facebook_title_text">Facebook Login</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="submit">Submit</string>
+    <string name="create_account">Create Account</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="share">Share</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="watch_earn">Watch video to earn 2 coins</string>
+    <string name="roll_dice_earn">Roll dice to earn coins</string>
+    <string name="tictactoe_earn">Play &amp; Win 10 coins</string>
+    <string name="watch"> Watch</string>
+    <string name="claim"> Claim</string>
+    <string name="play"> Play</string>
+    <string name="redeem">Redeem</string>
+    <string name="roll">Roll</string>
+    <string name="points">coins</string>
+    <string name="cancel">Cancel</string>
+    <string name="myrewards">  My Rewards  </string>
+    <string name="claim_daily_reward">Use the app daily and get 15 coins</string>
+    <string name="retry">Retry</string>
+    <string name="email_not_verified">Your email is not verified !</string>
+    <string name="email_not_registered">%s is not registered !</string>
+    <string name="email_sent">Email sent to %s</string>
+    <string name="send_verification_mail">Send verification email</string>
+    <string name="recipient">Gift to\n%s</string>
+    <string name="status">Status : %1$s %2$s</string>
+    <string name="redeem_date">Redeem Date : %s</string>
+    <string name="to_recipient">To : %s</string>
+    <string name="already_claimed">Already claimed. Check back tomorrow</string>
+    <string name="video_not_ready">Video not ready</string>
+
+    <string name="pending">Pending</string>
+    <string name="completed">Completed On</string>
+    <string name="amazon_giftcard">Amazon Gift Card</string>
+    <string name="paytm_giftcard">Paytm Gift Card</string>
+    <string name="vodafone_recharge">Vodafone Recharge</string>
+    <string name="airtel_recharge">Airtel Recharge</string>
+    <string name="idea_recharge">Idea Recharge</string>
+    <string name="bsnl_recharge">BSNL Recharge</string>
+    <string name="aircel_recharge">Aircel Recharge</string>
+    <string name="jio_recharge">Jio Recharge</string>
+    <string name="select_circle">Select Mobile Circle</string>
+    <string name="mobile_hint">Enter Mobile Number</string>
+    <string name="email_hint">Enter Email</string>
+    <string name="no_network">No Network. Check you internet</string>
+
+    <!--TIC-TAC-TOE -->
+    <string name="tic_tac_toe">Tic Tac Toe</string>
+    <string name="played_three_times">You already played 3 times today. Come back tomorrow</string>
+
+    <string name="disclaimer_mobile">**Important**\nProvide valid prepaid mobile number and circle for redeeming the mobile recharge.\n
+        \n*All product names, logos, and brands are property of their respective owners. All company, product and service names used in this website are for identification purposes only.</string>
+    <string name="disclaimer_giftcard">**Important**\nProvide valid email for redeeming the gift card.\n
+        \n*All product names, logos, and brands are property of their respective owners. All company, product and service names used in this website are for identification purposes only.</string>
+
+    <array name="mobile_circle">
+        <item>Andra Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chattisgarh</item>
+        <item>Chennai</item>
+        <item>Delhi</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal</item>
+        <item>Jammu Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Kolkata</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Mumbai</item>
+        <item>North East</item>
+        <item>Orissa</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Tamil Nadu</item>
+        <item>Uttar Pradesh(E)</item>
+        <item>Uttar Pradesh(W)</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+
+    </array>
+
+</resources>
