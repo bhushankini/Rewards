@@ -29,8 +29,8 @@ import com.mobilemauj.rewards.model.User;
 import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.FirebaseDatabaseUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
+import com.mobilemauj.rewards.utility.ShortURL;
 import com.mobilemauj.rewards.utility.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setTitle(getString(R.string.app_name));
+        }
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseUserDatabase = mFirebaseInstance.getReference(User.FIREBASE_USER_ROOT);
         mFirebaseStatisticsDatabase = mFirebaseInstance.getReference(Statistics.FIREBASE_STATISTICS_ROOT);
+        if (PrefUtils.getStringFromPrefs(this,Constants.REFERRAL_LINK,"").length() < 1){
+            getShortReferralLink();
+        }
         addPointsChangeListener();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -185,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initStatistics(boolean isNewDay){
+
         final String userId = Utils.getUserId(this);
 
         if (isNewDay){
@@ -218,6 +224,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getShortReferralLink(){
+        String longUrl = "https://play.google.com/store/apps/details?id=com.mobilemauj.rewards&referrer="+ Utils.encryptData(Utils.getUserId(this));
+        ShortURL.makeShortUrl(longUrl, new ShortURL.ShortUrlListener() {
+            @Override
+            public void OnFinish(String url) {
+                if(url != null && 0 < url.length()) {
+                    PrefUtils.saveStringToPrefs(MainActivity.this,Constants.REFERRAL_LINK,url);
+                }
+            }
+        });
     }
 
 }

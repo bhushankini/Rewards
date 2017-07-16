@@ -1,6 +1,7 @@
 package com.mobilemauj.rewards.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,6 +20,8 @@ import com.applovin.sdk.AppLovinAdRewardListener;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinErrorCodes;
 import com.applovin.sdk.AppLovinSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
@@ -51,6 +54,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
     private Button btnVungle;
     RelativeLayout rlDice;
     RelativeLayout rlTicTacToe;
+    RelativeLayout rlFBpost;
     private RewardedVideoAd mRewardedVideoAd;
     private DatabaseReference mFirebaseUserDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -112,6 +116,8 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
         rlDice.setOnClickListener(this);
         rlTicTacToe = (RelativeLayout) view.findViewById(R.id.rl_tictactoe);
         rlTicTacToe.setOnClickListener(this);
+        rlFBpost = (RelativeLayout)view.findViewById(R.id.rl_fbpost);
+        rlFBpost.setOnClickListener(this);
         MobileAds.initialize(getActivity(), Constants.ADMOB_APP_ID);
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
@@ -301,8 +307,34 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
             case  R.id.rl_tictactoe:
                 startActivity(new Intent(getActivity(), TicTacToeActivity.class));
                 break;
+
+            case R.id.rl_fbpost:
+                Log.d(TAG,"POST ON FB");
+                share();
+                break;
             default:
         }
+    }
+
+    private void share(){
+        Intent shareIntent;
+
+        shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT,"My Rewards app");
+
+        String link = PrefUtils.getStringFromPrefs(getActivity(),Constants.REFERRAL_LINK,null);
+        if(link !=null){
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey get mobile recharge and gift cards " + link);
+
+        }
+        else{
+            String referrer = Utils.encryptData(Utils.getUserId(getActivity()));
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey get mobile recharge and gift cards " + "https://play.google.com/store/apps/details?id=com.mobilemauj.rewards&referrer="+ referrer);
+        }
+        shareIntent.setType("text/plain");
+        startActivity(Intent.createChooser(shareIntent,"Share with"));
+
     }
 
     private void log(String s){

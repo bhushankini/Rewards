@@ -83,6 +83,8 @@ public class AccountFragment extends Fragment {
                             @Override
                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                 PrefUtils.removeFromPrefs(getActivity(), Constants.REFERRER_ID);
+                                PrefUtils.removeFromPrefs(getActivity(), Constants.REFERRAL_LINK);
+                                PrefUtils.removeFromPrefs(getActivity(), Constants.USER_ID);
                                 FirebaseAuth.getInstance().signOut();
                                 LoginManager.getInstance().logOut();
                                 startActivity(new Intent(getActivity(),LoginActivity.class));

@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent">
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
@@ -13,9 +15,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/tv_norewards"
+            android:background="@drawable/relative_layout_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/no_rewards_claimed"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myrewards_recycler_view"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_width="match_parent"/>
 
 </LinearLayout>

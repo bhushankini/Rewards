@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,8 +26,7 @@ public class MyRewardsActivity extends BaseActivity {
 
     private static final String TAG = "MyRewardsActivity";
 
-    private DatabaseReference mFirebaseRedeemDatabase;
-
+    private TextView tvNoRewards;
     private MyRewardsAdapter adapter;
     private ArrayList<Redeem> redeemList = new ArrayList<>();
     private RecyclerView recycler;
@@ -43,7 +45,7 @@ public class MyRewardsActivity extends BaseActivity {
         recycler = (RecyclerView)findViewById(R.id.myrewards_recycler_view);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setHasFixedSize(true);
-
+        tvNoRewards =(TextView) findViewById(R.id.tv_norewards);
 
     }
 
@@ -68,10 +70,16 @@ public class MyRewardsActivity extends BaseActivity {
                     Redeem txn = ds.getValue(Redeem.class);
                     redeemList.add(txn);
                 }
-
-                adapter = new MyRewardsAdapter(MyRewardsActivity.this,redeemList);
-                recycler.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if(redeemList.size()>0) {
+                    tvNoRewards.setVisibility(View.GONE);
+                    recycler.setVisibility(View.VISIBLE);
+                    adapter = new MyRewardsAdapter(MyRewardsActivity.this, redeemList);
+                    recycler.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                } else{
+                    tvNoRewards.setVisibility(View.VISIBLE);
+                    recycler.setVisibility(View.GONE);
+                }
             }
 
             @Override

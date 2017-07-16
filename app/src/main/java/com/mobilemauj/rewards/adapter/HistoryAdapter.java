@@ -56,7 +56,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         txtPoints.setText(""+dataSet.get(listPosition).getPoints());
         if (dataSet.get(listPosition).getPoints() > 0) {
             txtPoints.setTextColor(Color.parseColor("#006600"));
-            txtPoints.setText(""+dataSet.get(listPosition).getPoints());
+            txtPoints.setText("+"+dataSet.get(listPosition).getPoints());
 
         } else {
             txtPoints.setTextColor(Color.RED);

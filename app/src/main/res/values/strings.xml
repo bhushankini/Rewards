@@ -65,6 +65,8 @@
     <string name="disclaimer_giftcard">**Important**\nProvide valid email for redeeming the gift card.\n
         \n*All product names, logos, and brands are property of their respective owners. All company, product and service names used in this website are for identification purposes only.</string>
 
+    <string name="no_rewards_claimed">You have not claimed any rewards. Keep playing and watching videos to claim rewards.</string>
+
     <array name="mobile_circle">
         <item>Andra Pradesh</item>
         <item>Assam</item>
