@@ -21,11 +21,6 @@ import com.mobilemauj.rewards.utility.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
-/**
- * Created by bkini on 6/18/17.
- */
-
 public class HistoryFragment extends Fragment {
 
     private HistoryAdapter adapter;

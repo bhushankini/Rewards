@@ -1,9 +1,5 @@
 package com.mobilemauj.rewards.utility;
 
-/**
- * Created by bkini on 6/17/17.
- */
-
 public class Constants {
 
     public static final String ADMOB_AD_UNIT_ID = "ca-app-pub-5302069989228488/7984497850"; //mm

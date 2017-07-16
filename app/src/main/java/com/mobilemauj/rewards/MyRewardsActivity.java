@@ -24,8 +24,6 @@ import java.util.ArrayList;
 
 public class MyRewardsActivity extends BaseActivity {
 
-    private static final String TAG = "MyRewardsActivity";
-
     private TextView tvNoRewards;
     private MyRewardsAdapter adapter;
     private ArrayList<Redeem> redeemList = new ArrayList<>();

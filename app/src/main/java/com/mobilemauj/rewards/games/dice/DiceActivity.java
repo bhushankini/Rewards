@@ -31,7 +31,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class DiceActivity extends AppCompatActivity {
 
     private static final Random RANDOM = new Random();
-    private static final String TAG = "DICE";
     private Button rollDices;
     private ImageView imageView1, imageView2;
     private TextView txtMessage;
@@ -186,46 +185,5 @@ public class DiceActivity extends AppCompatActivity {
 
                 }
             });
-
-    }
-
-
-    private void rewardsPoints(final int points, final String source, final String type) {
-        final String userId = Utils.getUserId(this);
-        mFirebaseUserDatabase.child(userId).child("points").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null) {
-                    long totalPoints = (long) dataSnapshot.getValue();
-                    mFirebaseUserDatabase.child(userId).child("points").setValue(totalPoints + points);
-                    UserTransaction ut = new UserTransaction();
-                    ut.setSource(source);
-                    ut.setPoints(points);
-                    ut.setType(type);
-                    mFirebaseTransactionDatabase.child(userId).push().setValue(ut.toMap());
-                    showRewardsDialog("Congrats","You got "+points+" coins", SweetAlertDialog.NORMAL_TYPE);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void showRewardsDialog(String title, String message ,int type){
-        new SweetAlertDialog(this, type)
-                .setTitleText(title)
-                .setCustomImage(R.mipmap.ic_launcher)
-                .setContentText(message)
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismissWithAnimation();
-                    }
-                })
-                .show();
-
     }
 }

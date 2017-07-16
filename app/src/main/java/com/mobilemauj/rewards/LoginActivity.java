@@ -33,10 +33,6 @@ import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.Utils;
 
-/**
- * Created by bkini on 6/1/17.
- */
-
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "LoginActivity";

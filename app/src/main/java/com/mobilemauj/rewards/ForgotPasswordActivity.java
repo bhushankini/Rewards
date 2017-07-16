@@ -17,13 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.model.User;
 
-/**
- * Created by bkini on 6/27/17.
- */
-
 public class ForgotPasswordActivity extends BaseActivity {
 
-    private Button btnSubmit;
     private TextView txtEmail;
 
     @Override
@@ -31,7 +26,7 @@ public class ForgotPasswordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        btnSubmit =(Button) findViewById(R.id.signup_button);
+        Button btnSubmit =(Button) findViewById(R.id.signup_button);
         txtEmail = (TextView) findViewById(R.id.input_email);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {

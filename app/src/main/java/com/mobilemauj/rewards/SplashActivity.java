@@ -10,7 +10,6 @@ import android.util.Log;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.mobilemauj.rewards.interfaces.ServerTimeAsyncResponse;
 import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.PrefUtils;
@@ -20,28 +19,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by bkini on 6/17/17.
- */
-
 public class SplashActivity extends Activity implements ServerTimeAsyncResponse {
     private String country;
     private FirebaseAuth mAuth;
-    private DatabaseReference mFirebaseStatisticsDatabase;
-    private DatabaseReference mFirebaseUserDatabase;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-
-       /* String user = "lhZNJQuPq7atIiHgGna4tFt6QQB3";
-        Log.d("t","Original "+user);
-        String encr= Utils.encryptData(user);
-        Log.d("t","Encrypterd "+encr);
-        String back= Utils.decryptData(encr);
-        Log.d("t","Data back  "+back);
-    */
         country = PrefUtils.getStringFromPrefs(this, Constants.USER_COUNTRY,"");
         if(country.length()==0){
             country = Utils.getCountryCode(this);
@@ -57,7 +42,7 @@ public class SplashActivity extends Activity implements ServerTimeAsyncResponse 
                 }
             }, 1500);
         } else {
-            Toast.makeText(this, "NO Internet",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No Internet",Toast.LENGTH_LONG).show();
         }
 
     }
@@ -76,7 +61,6 @@ public class SplashActivity extends Activity implements ServerTimeAsyncResponse 
     @Override
     public void processFinish(String result) {
         try {
-            Log.e("KHUSHI", "KHUSHI process finish " + Long.parseLong(result));
             PrefUtils.saveLongToPrefs(this, Constants.SERVER_TIME, Long.parseLong(result));
             gotoMain();
         } catch (Exception e){

@@ -43,14 +43,6 @@
 
     <string name="pending">Pending</string>
     <string name="completed">Completed On</string>
-    <string name="amazon_giftcard">Amazon Gift Card</string>
-    <string name="paytm_giftcard">Paytm Gift Card</string>
-    <string name="vodafone_recharge">Vodafone Recharge</string>
-    <string name="airtel_recharge">Airtel Recharge</string>
-    <string name="idea_recharge">Idea Recharge</string>
-    <string name="bsnl_recharge">BSNL Recharge</string>
-    <string name="aircel_recharge">Aircel Recharge</string>
-    <string name="jio_recharge">Jio Recharge</string>
     <string name="select_circle">Select Mobile Circle</string>
     <string name="mobile_hint">Enter Mobile Number</string>
     <string name="email_hint">Enter Email</string>

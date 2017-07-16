@@ -1,7 +1,6 @@
 package com.mobilemauj.rewards.fragments;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,8 +19,6 @@ import com.applovin.sdk.AppLovinAdRewardListener;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinErrorCodes;
 import com.applovin.sdk.AppLovinSdk;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
@@ -52,9 +49,9 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
     private Button btnAppLovin;
     private Button btnAdmob;
     private Button btnVungle;
-    RelativeLayout rlDice;
-    RelativeLayout rlTicTacToe;
-    RelativeLayout rlFBpost;
+    private RelativeLayout rlDice;
+    private RelativeLayout rlTicTacToe;
+    private RelativeLayout rlFBpost;
     private RewardedVideoAd mRewardedVideoAd;
     private DatabaseReference mFirebaseUserDatabase;
     private FirebaseDatabase mFirebaseInstance;

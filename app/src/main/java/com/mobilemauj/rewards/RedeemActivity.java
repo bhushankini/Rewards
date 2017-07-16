@@ -33,29 +33,20 @@ import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.Utils;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by bkini on 6/27/17.
- */
-
 public class RedeemActivity extends BaseActivity {
 
-    private static final String TAG = "SignUpActivity";
     private Button btnRedeem;
     private TextView txtGiftCard;
     private TextView txtValue;
     private TextView txtWorth;
     private TextView txtRecipient;
     private TextView txtRegion;
-
     private TextView txtDescription;
-
-
     private ImageView icon;
     private LinearLayout llCircle;
     private EditText etRecipient;
     private ImageView imgBigIcon;
     private Spinner spinnerCircle;
-
     private DatabaseReference mFirebaseRedeemDatabase;
     private DatabaseReference mFirebaseUserDatabase;
     private DatabaseReference mFirebaseTransactionDatabase;
@@ -63,7 +54,7 @@ public class RedeemActivity extends BaseActivity {
     private RelativeLayout rlCard;
     private Rewards rewards;
     private int pointsDiff = 1;
-    String circle = "";
+    private String circle = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

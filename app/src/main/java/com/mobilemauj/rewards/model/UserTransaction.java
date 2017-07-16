@@ -6,10 +6,6 @@ import com.google.firebase.database.ServerValue;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by bkini on 6/6/17.
- */
-
 public class UserTransaction {
     private String source;
 

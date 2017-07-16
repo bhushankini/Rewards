@@ -25,11 +25,11 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TicTacToeActivity extends AppCompatActivity {
 
-    int c[][];
-    int i, j;
-    Button b[][];
-    TextView txtMessage;
-    AI ai;
+    private int c[][];
+    private int i, j;
+    private Button b[][];
+    private TextView txtMessage;
+    private AI ai;
     private int gameCount = 0;
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mFirebaseUserDatabase;

@@ -37,21 +37,14 @@ import com.mobilemauj.rewards.utility.Utils;
 import com.squareup.picasso.Picasso;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-/**
- * Created by bkini on 6/18/17.
- */
 
 public class AccountFragment extends Fragment {
 
-    private Button btnLogout;
-    private Button btnShare;
-    private Button btnMyRewards;
+
     private RelativeLayout rlEmailVerification;
     private CircularImageView imgProfile;
     private TextView txtUserName;
     private TextView txtUserEmail;
-    private TextView txtSendVerificationMail;
-
 
     public AccountFragment() {
         // Required empty public constructor
@@ -67,6 +60,10 @@ public class AccountFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Button btnLogout;
+        Button btnShare;
+        Button btnMyRewards;
+        TextView txtSendVerificationMail;
         btnLogout = (Button)view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,12 +124,6 @@ public class AccountFragment extends Fragment {
             }
         });
         updateUI();
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
 
     }
 

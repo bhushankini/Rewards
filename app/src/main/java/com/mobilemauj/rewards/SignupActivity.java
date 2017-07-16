@@ -27,10 +27,6 @@ import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.Utils;
 
-/**
- * Created by bkini on 6/27/17.
- */
-
 public class SignupActivity extends BaseActivity {
 
     private static final String TAG = "SignUpActivity";
@@ -197,17 +193,18 @@ public class SignupActivity extends BaseActivity {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(txtName.getText().toString())
                 .build();
-
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "User profile updated.");
-                            updateUI();
-                        }
+        if(user !=null) {
+            user.updateProfile(profileUpdates)
+             .addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "User profile updated.");
+                        updateUI();
                     }
-                });
+                }
+            });
+        }
     }
 
     private void sendEmailVerification() {

@@ -6,10 +6,6 @@ import com.google.firebase.database.ServerValue;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by bkini on 7/2/17.
- */
-
 public class Redeem {
     private int value;
     private String recipient;

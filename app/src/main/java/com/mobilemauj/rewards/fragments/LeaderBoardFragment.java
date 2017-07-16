@@ -20,10 +20,6 @@ import com.mobilemauj.rewards.model.User;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by bkini on 6/18/17.
- */
-
 public class LeaderBoardFragment extends Fragment {
     private LeaderBoardAdapter adapter;
     private ArrayList<User> userArrayList = new ArrayList<>();
