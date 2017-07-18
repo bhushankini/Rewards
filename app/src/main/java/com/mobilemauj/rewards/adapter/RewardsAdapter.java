@@ -2,6 +2,7 @@ package com.mobilemauj.rewards.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,14 +14,18 @@ import android.widget.TextView;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.RedeemActivity;
 import com.mobilemauj.rewards.model.Rewards;
+import com.mobilemauj.rewards.utility.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import okhttp3.internal.Util;
 
 public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsViewHolder> {
 
     private ArrayList<Rewards> dataSet;
     private Context context;
+    private Drawable icCoin;
 
     public RewardsAdapter(Context context, ArrayList<Rewards> data) {
         this.dataSet = data;
@@ -32,7 +37,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
                                                 int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_rewards, parent, false);
-
+        icCoin = Utils.getCoinIcon(context);
         return new RewardsViewHolder(view);
     }
 
@@ -40,6 +45,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
     public void onBindViewHolder(final RewardsViewHolder holder, final int listPosition) {
         TextView txtDisplay = holder.txtDisplay;
         TextView txtValue = holder.txtValue;
+        ImageView imgCoin = holder.imgCoin;
 
         ImageView imgReward = holder.imgReward;
         CardView cardView = holder.cardView;
@@ -47,7 +53,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
             txtDisplay.setText(dataSet.get(listPosition).getDisplay());
             txtValue.setText("" + dataSet.get(listPosition).getValue());
             String url = Rewards.IMAGES_BASE_URL + dataSet.get(listPosition).getBrand().toLowerCase() + "_small.png";
-
+            imgCoin.setBackground(icCoin);
             Picasso.with(context).load(url).into(imgReward);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,6 +77,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
         private TextView txtDisplay;
         private TextView txtValue;
         private ImageView imgReward;
+        private ImageView imgCoin;
         private CardView cardView;
 
         public RewardsViewHolder(View itemView) {
@@ -78,6 +85,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
             this.txtDisplay = (TextView) itemView.findViewById(R.id.tv_display);
             this.txtValue =(TextView) itemView.findViewById(R.id.tv_value);
             this.imgReward = (ImageView) itemView.findViewById(R.id.imgReward);
+            this.imgCoin = (ImageView) itemView.findViewById(R.id.imgCoin);
             this.cardView = (CardView) itemView.findViewById(R.id.card_view);
 
         }

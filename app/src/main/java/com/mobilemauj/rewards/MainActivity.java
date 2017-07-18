@@ -11,13 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.fragments.AccountFragment;
 import com.mobilemauj.rewards.fragments.HistoryFragment;
@@ -27,7 +27,7 @@ import com.mobilemauj.rewards.fragments.VideoFragment;
 import com.mobilemauj.rewards.model.Statistics;
 import com.mobilemauj.rewards.model.User;
 import com.mobilemauj.rewards.utility.Constants;
-import com.mobilemauj.rewards.utility.FirebaseDatabaseUtil;
+import com.mobilemauj.rewards.utility.LogUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.ShortURL;
 import com.mobilemauj.rewards.utility.Utils;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private TextView txtPoints;
+    private ImageView imgCoinIcon;
     private DatabaseReference mFirebaseUserDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mFirebaseStatisticsDatabase;
@@ -70,12 +71,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         txtPoints = (TextView) findViewById(R.id.toolbar_points);
+        imgCoinIcon = (ImageView) findViewById(R.id.ic_coin);
+        imgCoinIcon.setBackground(Utils.getCoinIcon(this));
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseUserDatabase = mFirebaseInstance.getReference(User.FIREBASE_USER_ROOT);
         mFirebaseStatisticsDatabase = mFirebaseInstance.getReference(Statistics.FIREBASE_STATISTICS_ROOT);
         if (PrefUtils.getStringFromPrefs(this,Constants.REFERRAL_LINK,"").length() < 1){
             getShortReferralLink();
         }
+        addGameStatisticListener();
         addPointsChangeListener();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -97,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new VideoFragment(), "Home");
+        adapter.addFrag(new VideoFragment(), "Earn");
         adapter.addFrag(new RewardsFragment(), "Rewards");
         adapter.addFrag(new LeaderBoardFragment(), "Leaderboard");
         adapter.addFrag(new HistoryFragment(), "History");
@@ -134,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
                 boolean isNewDay = Utils.isNewDate(user.getLastopen(),PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME,user.getLastopen()));
 
                 Log.e("KHUSHI", "KHUSHI is new Day " + isNewDay);
-                initStatistics(isNewDay);
 
            //     PrefUtils.saveToPrefs(MainActivity.this, Constants.USER_ID, user.getUserId());
                 txtPoints.setText(" " + user.getPoints() + "  ");
@@ -149,6 +152,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    void addGameStatisticListener(){
+        final String userId = Utils.getUserId(this);
+        mFirebaseStatisticsDatabase.child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get user value
+                        Statistics stats = dataSnapshot.getValue(Statistics.class);
+                        LogUtil.d(stats.toString());
+                        boolean isNewDay = Utils.isNewDate(stats.getLastplayed(),PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME, stats.getLastplayed()));
+                        if(isNewDay) {
+                            mFirebaseStatisticsDatabase.child(userId).child("dice").setValue(0);
+                            mFirebaseStatisticsDatabase.child(userId).child("tictactoe").setValue(0);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -184,43 +210,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         checkConnection();
-    }
-
-    private void initStatistics(boolean isNewDay){
-
-        final String userId = Utils.getUserId(this);
-
-        if (isNewDay){
-
-            FirebaseDatabaseUtil.rewardsPoints(this,15,"Daily","Reward");
-            mFirebaseUserDatabase.child(userId).child("lastopen").setValue(ServerValue.TIMESTAMP);
-            PrefUtils.saveIntToPrefs(this, Constants.DICE_COUNT,0);
-            PrefUtils.saveIntToPrefs(this, Constants.TTT_COUNT,0);
-            mFirebaseStatisticsDatabase.child(userId).child("dice").setValue(0);
-            mFirebaseStatisticsDatabase.child(userId).child("tictactoe").setValue(0);
-            return;
-        }
-
-
-        mFirebaseStatisticsDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e(TAG,"DDDDDDDD stats "+dataSnapshot.getValue());
-                Statistics stats = dataSnapshot.getValue(Statistics.class);
-                if(stats == null){
-                    Log.e(TAG,"DDDDDDDD stats null");
-                } else {
-                    PrefUtils.saveIntToPrefs(MainActivity.this, Constants.DICE_COUNT,stats.getDice());
-                    PrefUtils.saveIntToPrefs(MainActivity.this, Constants.TTT_COUNT,stats.getTictactoe());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
     }
 
     private void getShortReferralLink(){

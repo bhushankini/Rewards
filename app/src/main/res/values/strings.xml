@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">My Rewards</string>
+    <string name="app_name">Rewards</string>
     <string name="facebook_app_id">509856942688131</string>
     <string name="fb_login_protocol_scheme">fb509856942688131</string>
-
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="firebase_url">https://myrewards-d26da.firebaseio.com/</string>
     <string name="loading">Loading..</string>

@@ -47,10 +47,11 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imgCoin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_coin" />
+                     />
 
                 <TextView
                     android:id="@+id/tv_value"

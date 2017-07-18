@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_coin" />
+                    android:src="@mipmap/ic_coin_in" />
 
                 <TextView
                     android:id="@+id/tv_value"

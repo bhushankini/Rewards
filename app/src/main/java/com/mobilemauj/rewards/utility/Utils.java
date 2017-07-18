@@ -1,6 +1,7 @@
 package com.mobilemauj.rewards.utility;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
@@ -79,5 +80,12 @@ public class Utils {
             result = result + String.valueOf( (char) (input.charAt(i) - 1));
         }
         return result;
+    }
+
+    public static Drawable getCoinIcon(Context context) {
+        String country = PrefUtils.getStringFromPrefs(context, Constants.USER_COUNTRY,"in").toLowerCase();
+         return  context.getResources().getDrawable(context.getResources()
+                .getIdentifier("ic_coin_"+country, "mipmap", context.getPackageName()));
+
     }
 }

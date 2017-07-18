@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.model.Statistics;
@@ -330,6 +331,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                     }
                     if(updateCount) {
                         mFirebaseStatsticsDatabase.child(userId).child(Statistics.FIREBASE_STATISTICS_CHILD_TICTACTOE).setValue(gameCount+1);
+                        mFirebaseStatsticsDatabase.child(userId).child(Statistics.FIREBASE_STATISTICS_CHILD_LAST_PLAYED).setValue(ServerValue.TIMESTAMP);
                         PrefUtils.saveIntToPrefs(TicTacToeActivity.this, Constants.TTT_COUNT, localCount +1);
                         txtMessage.setText("You have "+(3 - localCount - 1)+" games left");
                         if(localCount+1 >2){

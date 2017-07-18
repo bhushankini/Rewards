@@ -73,7 +73,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_coin"
                 android:padding="10dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true" />

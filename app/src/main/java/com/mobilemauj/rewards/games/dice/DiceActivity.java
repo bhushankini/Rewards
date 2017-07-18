@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.model.Statistics;
@@ -166,6 +167,7 @@ public class DiceActivity extends AppCompatActivity {
                         }
                         if(updateCount) {
                             mFirebaseStatsticsDatabase.child(userId).child(Statistics.FIREBASE_STATISTICS_CHILD_DICE).setValue(localCount+1);
+                            mFirebaseStatsticsDatabase.child(userId).child(Statistics.FIREBASE_STATISTICS_CHILD_LAST_PLAYED).setValue(ServerValue.TIMESTAMP);
                             PrefUtils.saveIntToPrefs(DiceActivity.this,Constants.DICE_COUNT, localCount +1);
                             Log.d("TAG","KKKKK update db "+gameCount);
                             txtMessage.setText("You have "+(3 - localCount - 1)+" dice rolls");

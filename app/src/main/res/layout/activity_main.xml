@@ -50,9 +50,8 @@
                         android:id="@+id/ic_coin"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-
                         android:layout_toStartOf="@+id/toolbar_points"
-                        android:src="@mipmap/ic_coin" />
+                        />
                 </RelativeLayout>
 
 

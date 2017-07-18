@@ -1,6 +1,7 @@
 package com.mobilemauj.rewards.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.model.User;
+import com.mobilemauj.rewards.utility.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
     private ArrayList<User> dataSet;
     private Context context;
+    private Drawable icCoin;
 
     public static class LeaderBoardViewHolder extends RecyclerView.ViewHolder {
 
@@ -24,6 +27,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         private TextView txtPoints;
         private TextView txtRank;
         private ImageView imgProfile;
+        private ImageView imgCoin;
 
         public LeaderBoardViewHolder(View itemView) {
             super(itemView);
@@ -32,6 +36,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
             this.txtPoints = (TextView) itemView.findViewById(R.id.tv_points);
             this.txtRank = (TextView) itemView.findViewById(R.id.tv_rank);
             this.imgProfile = (ImageView) itemView.findViewById(R.id.img_profile);
+            this.imgCoin = (ImageView) itemView.findViewById(R.id.ic_coin);
 
         }
     }
@@ -46,7 +51,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                                                 int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_leaderboard, parent, false);
-
+        icCoin = Utils.getCoinIcon(context);
         return new LeaderBoardViewHolder(view);
     }
 
@@ -55,12 +60,14 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         TextView txtName = holder.txtName;
         TextView txtPoints = holder.txtPoints;
         TextView txtRank = holder.txtRank;
+        ImageView imgCoin = holder.imgCoin;
         ImageView imgProfile = holder.imgProfile;
 
         txtName.setText(dataSet.get(listPosition).getName());
         txtPoints.setText(""+dataSet.get(listPosition).getPoints());
         txtRank.setText("#"+(listPosition+1));
         Picasso.with(context).load(dataSet.get(listPosition).getPhotoUrl()).placeholder(R.drawable.user_icon).into(imgProfile);
+        imgCoin.setImageDrawable(icCoin);
 
     }
 

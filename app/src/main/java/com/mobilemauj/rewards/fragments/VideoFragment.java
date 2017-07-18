@@ -1,6 +1,7 @@
 package com.mobilemauj.rewards.fragments;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.applovin.adview.AppLovinIncentivizedInterstitial;
@@ -24,18 +26,15 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
-import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.games.dice.DiceActivity;
 import com.mobilemauj.rewards.games.tictactoe.TicTacToeActivity;
 import com.mobilemauj.rewards.model.User;
 import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.FirebaseDatabaseUtil;
+import com.mobilemauj.rewards.utility.LogUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.Utils;
 import com.vungle.publisher.EventListener;
@@ -45,20 +44,21 @@ import java.util.Map;
 public class VideoFragment extends Fragment implements View.OnClickListener ,RewardedVideoAdListener {
 
     private final String TAG = "REWARDS";
-    private Button btnDailyReward;
     private Button btnAppLovin;
     private Button btnAdmob;
     private Button btnVungle;
     private RelativeLayout rlDice;
     private RelativeLayout rlTicTacToe;
     private RelativeLayout rlFBpost;
+    private RelativeLayout rlDailyReward;
     private RewardedVideoAd mRewardedVideoAd;
-    private DatabaseReference mFirebaseUserDatabase;
-    private FirebaseDatabase mFirebaseInstance;
+  //  private DatabaseReference mFirebaseUserDatabase;
+  //  private FirebaseDatabase mFirebaseInstance;
     private final VunglePub vunglePub = VunglePub.getInstance();
     private AppLovinIncentivizedInterstitial myIncent;
-
-
+    private Drawable icCoin;
+    private ImageView imgCoin;
+    private static boolean isDailyRewardAd = false;
     public VideoFragment() {
         // Required empty public constructor
     }
@@ -95,12 +95,9 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.d(TAG,"onCreateView Video");
-
+        icCoin = Utils.getCoinIcon(getActivity());
 
         final View view = inflater.inflate(R.layout.fragment_video, container, false);
-        btnDailyReward = (Button) view.findViewById(R.id.btnDailyReward);
-        btnDailyReward.setOnClickListener(this);
-
         btnAppLovin = (Button) view.findViewById(R.id.btnAppLovin);
         btnAppLovin.setOnClickListener(this);
 
@@ -109,6 +106,8 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
 
         btnVungle = (Button) view.findViewById(R.id.btnVungle);
         btnVungle.setOnClickListener(this);
+        rlDailyReward = (RelativeLayout) view.findViewById(R.id.rl_dailyreward);
+        rlDailyReward.setOnClickListener(this);
         rlDice = (RelativeLayout) view.findViewById(R.id.rl_dice);
         rlDice.setOnClickListener(this);
         rlTicTacToe = (RelativeLayout) view.findViewById(R.id.rl_tictactoe);
@@ -116,53 +115,20 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
         rlFBpost = (RelativeLayout)view.findViewById(R.id.rl_fbpost);
         rlFBpost.setOnClickListener(this);
         MobileAds.initialize(getActivity(), Constants.ADMOB_APP_ID);
+        imgCoin = (ImageView) view.findViewById(R.id.ic_coin);
+        imgCoin.setImageDrawable(icCoin);
 
-        mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseUserDatabase = mFirebaseInstance.getReference(User.FIREBASE_USER_ROOT);
+
+
         return view;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btnDailyReward:
-                long serverTime = PrefUtils.getLongFromPrefs(getActivity(), Constants.SERVER_TIME, (long) 0.0);
-                long lastDailyReward = PrefUtils.getLongFromPrefs(getActivity(), Constants.LAST_DAILY_REWARD, (long) 0.0);
-                boolean dailyReward = Utils.isNewDate(lastDailyReward,serverTime);
-                if(dailyReward){
-                //    rewardsPoints(15,"Daily", "Reward");
-                    FirebaseDatabaseUtil.rewardsPoints(getActivity(),15,"Daily","Reward");
-                    PrefUtils.saveLongToPrefs(getActivity(), Constants.LAST_DAILY_REWARD, serverTime);
 
-                    mFirebaseUserDatabase.child(Utils.getUserId(getActivity())).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            if (dataSnapshot.getValue() != null) {
-                                Log.d(TAG, "KHUSHI111 snapshot setting last open" + dataSnapshot.getValue());
-                                mFirebaseUserDatabase.child(Utils.getUserId(getActivity())).child("lastopen").setValue(ServerValue.TIMESTAMP);
-
-
-                            } else {
-                                Log.d(TAG, "KHUSHI111 snapshot Error setting lastopne");
-
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-
-                } else {
-                    Toast.makeText(getActivity(),getString(R.string.already_claimed),Toast.LENGTH_LONG).show();
-
-                }
-
-                break;
             case  R.id.btnAdmob:
+                isDailyRewardAd = false;
                 showRewardedVideo();
 
                 break;
@@ -309,6 +275,16 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
                 Log.d(TAG,"POST ON FB");
                 share();
                 break;
+
+            case R.id.rl_dailyreward:
+               if( isEligibleForDailyReward()) {
+                   LogUtil.d("DailyReward");
+                   isDailyRewardAd = true;
+                   showRewardedVideo();
+               } else {
+                   Toast.makeText(getActivity(),"Already calimed", Toast.LENGTH_LONG).show();
+               }
+                break;
             default:
         }
     }
@@ -361,9 +337,17 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        Log.d(TAG,"onRewarded");
-       // rewardsPoints(2,"Admob", "Video");
-        FirebaseDatabaseUtil.rewardsPoints(getActivity(),2,"Admob", "Video");
+        Log.d(TAG,"onRewarded "+rewardItem.getAmount());
+        Log.d(TAG,"onRewarded item "+rewardItem.toString());
+        if(isDailyRewardAd ) {
+            FirebaseDatabaseUtil.rewardsPoints(getActivity(),15,"Daily", "Reward");
+            FirebaseDatabase.getInstance().getReference(User.FIREBASE_USER_ROOT).child(Utils.getUserId(getActivity())).child("lastopen").setValue(ServerValue.TIMESTAMP);
+            long serverTime = PrefUtils.getLongFromPrefs(getActivity(), Constants.SERVER_TIME, (long) 0.0);
+            PrefUtils.saveLongToPrefs(getActivity(), Constants.LAST_DAILY_REWARD, serverTime);
+
+        } else {
+            FirebaseDatabaseUtil.rewardsPoints(getActivity(),2,"Admob", "Video");
+        }
 
     }
 
@@ -407,7 +391,6 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
         }
     }
 
-
     //Vungle
     private final EventListener vungleAdListener = new EventListener() {
         @Override
@@ -443,45 +426,10 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
         }
     };
 
-  /*  private void rewardsPoints(final int points, final String source, final String type) {
-        Log.d(TAG, "KHUSHI updatePoints ");
-        final String userId = PrefUtils.getStringFromPrefs(getActivity(), Constants.USER_ID, "unknownuser");
-        Log.d(TAG, "KHUSHI updatePoints userId "+userId);
-        mFirebaseUserDatabase.child(userId).child("points").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "KHUSHI snapshot " + dataSnapshot.getValue());
-                if (dataSnapshot.getValue() != null) {
-                    long totalPoints = (long) dataSnapshot.getValue();
-                    mFirebaseUserDatabase.child(userId).child("points").setValue(totalPoints + points);
-                    UserTransaction ut = new UserTransaction();
-                    ut.setSource(source);
-                    ut.setPoints(points);
-                    ut.setType(type);
-                    mFirebaseTransactionDatabase.child(userId).push().setValue(ut.toMap());
-                    showPointsRewardsDialog(points);
-                } else {
-                    mFirebaseUserDatabase.child(userId).child("points").setValue(points);
-                    // txtPoints.setText(points + "  "); //update points label
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        //
+    private boolean isEligibleForDailyReward(){
+        long serverTime = PrefUtils.getLongFromPrefs(getActivity(), Constants.SERVER_TIME, (long) 0.0);
+        long lastDailyReward = PrefUtils.getLongFromPrefs(getActivity(), Constants.LAST_DAILY_REWARD, (long) 0.0);
+        return Utils.isNewDate(lastDailyReward,serverTime);
     }
 
-
-    private void showPointsRewardsDialog(int points){
-        new SweetAlertDialog(getActivity(), SweetAlertDialog.BUTTON_POSITIVE)
-                .setTitleText("Congratulations!!!")
-                .setCustomImage(R.mipmap.ic_launcher)
-                .setContentText("Congratulations you got "+points+ " points")
-                .show();
-    }
-*/
 }
