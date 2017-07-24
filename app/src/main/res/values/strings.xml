@@ -48,6 +48,12 @@
     <string name="no_network">No Network. Check you internet</string>
 
     <!--TIC-TAC-TOE -->
+
+    <string name="first_human">You go first.</string>
+    <string name="turn_human">Your turn.</string>
+    <string name="turn_computer">Android\'s turn.</string>
+    <string name="result_tie">It\'s a tie!</string>
+    <string name="result_human_wins">You Won!</string>
     <string name="tic_tac_toe">Tic Tac Toe</string>
     <string name="played_three_times">You already played 3 times today. Come back tomorrow</string>
 

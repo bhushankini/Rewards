@@ -2,6 +2,8 @@ package com.mobilemauj.rewards.utility;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,13 +23,13 @@ private final static String TAG = "FirebaseDatabaseUtil";
         final DatabaseReference mFirebaseUserDatabase = FirebaseDatabase.getInstance().getReference().child(User.FIREBASE_USER_ROOT);
         final DatabaseReference mFirebaseTransactionDatabase = FirebaseDatabase.getInstance().getReference().child(UserTransaction.FIREBASE_TRANSACTION_ROOT);
         final String userId = Utils.getUserId(context);
-        mFirebaseUserDatabase.child(userId).child("points").addListenerForSingleValueEvent(new ValueEventListener() {
+        mFirebaseUserDatabase.child(userId).child(User.FIREBASE_USER_CHILD_POINT).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "KHUSHI snapshot " + dataSnapshot.getValue());
                 if (dataSnapshot.getValue() != null) {
                     long totalPoints = (long) dataSnapshot.getValue();
-                    mFirebaseUserDatabase.child(userId).child("points").setValue(totalPoints + points);
+                    mFirebaseUserDatabase.child(userId).child(User.FIREBASE_USER_CHILD_POINT).setValue(totalPoints + points);
                     UserTransaction ut = new UserTransaction();
                     ut.setSource(source);
                     ut.setPoints(points);
@@ -35,7 +37,7 @@ private final static String TAG = "FirebaseDatabaseUtil";
                     mFirebaseTransactionDatabase.child(userId).push().setValue(ut.toMap());
                     showPointsRewardsDialog(ctx, points);
                 } else {
-                    mFirebaseUserDatabase.child(userId).child("points").setValue(points);
+                    mFirebaseUserDatabase.child(userId).child(User.FIREBASE_USER_CHILD_POINT).setValue(points);
                 }
             }
 
@@ -53,6 +55,7 @@ private final static String TAG = "FirebaseDatabaseUtil";
                 .setCustomImage(R.mipmap.ic_launcher)
                 .setContentText("Congratulations you got "+points+ " points")
                 .show();
-    }
 
+  // Toast.makeText(context, "Congratulations you got "+points+ " points",Toast.LENGTH_LONG).show();
+    }
 }

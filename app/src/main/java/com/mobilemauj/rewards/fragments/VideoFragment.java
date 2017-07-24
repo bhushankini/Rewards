@@ -2,6 +2,7 @@ package com.mobilemauj.rewards.fragments;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -21,6 +22,12 @@ import com.applovin.sdk.AppLovinAdRewardListener;
 import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
 import com.applovin.sdk.AppLovinErrorCodes;
 import com.applovin.sdk.AppLovinSdk;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
@@ -30,7 +37,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.games.dice.DiceActivity;
-import com.mobilemauj.rewards.games.tictactoe.TicTacToeActivity;
+import com.mobilemauj.rewards.games.tictactoe.NewTicTacToeActivity;
+
 import com.mobilemauj.rewards.model.User;
 import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.FirebaseDatabaseUtil;
@@ -52,13 +60,13 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
     private RelativeLayout rlFBpost;
     private RelativeLayout rlDailyReward;
     private RewardedVideoAd mRewardedVideoAd;
-  //  private DatabaseReference mFirebaseUserDatabase;
-  //  private FirebaseDatabase mFirebaseInstance;
     private final VunglePub vunglePub = VunglePub.getInstance();
     private AppLovinIncentivizedInterstitial myIncent;
     private Drawable icCoin;
     private ImageView imgCoin;
     private static boolean isDailyRewardAd = false;
+
+    private CallbackManager callbackManager;
     public VideoFragment() {
         // Required empty public constructor
     }
@@ -117,8 +125,6 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
         MobileAds.initialize(getActivity(), Constants.ADMOB_APP_ID);
         imgCoin = (ImageView) view.findViewById(R.id.ic_coin);
         imgCoin.setImageDrawable(icCoin);
-
-
 
         return view;
     }
@@ -268,12 +274,13 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
                 break;
 
             case  R.id.rl_tictactoe:
-                startActivity(new Intent(getActivity(), TicTacToeActivity.class));
+                startActivity(new Intent(getActivity(), NewTicTacToeActivity.class));
                 break;
 
             case R.id.rl_fbpost:
                 Log.d(TAG,"POST ON FB");
-                share();
+              //  share();
+                shareOnWall();
                 break;
 
             case R.id.rl_dailyreward:
@@ -429,7 +436,51 @@ public class VideoFragment extends Fragment implements View.OnClickListener ,Rew
     private boolean isEligibleForDailyReward(){
         long serverTime = PrefUtils.getLongFromPrefs(getActivity(), Constants.SERVER_TIME, (long) 0.0);
         long lastDailyReward = PrefUtils.getLongFromPrefs(getActivity(), Constants.LAST_DAILY_REWARD, (long) 0.0);
+        LogUtil.e("Video fargment is eligible for daily");
         return Utils.isNewDate(lastDailyReward,serverTime);
     }
 
+    void shareOnWall() {
+
+        ShareDialog shareDialog = new ShareDialog(getActivity());
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog.registerCallback(callbackManager, new
+
+                FacebookCallback<Sharer.Result>() {
+                    @Override
+                    public void onSuccess(Sharer.Result result) {
+
+                        Log.d(TAG, "onSuccess: "+ result.toString());
+                        Log.d(TAG, "onSuccess: ");
+                        Toast.makeText(getActivity(), "onSuccess", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "onCancel: ");
+                        Toast.makeText(getActivity(), "onCancel", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d(TAG, "onError: ");
+                        Toast.makeText(getActivity(), "onError" + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentUrl(Uri.parse("http://mobilemauj.com/rewards/images/myrewards.png"))
+                    .build();
+
+            shareDialog.show(linkContent);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: ");
+    }
 }

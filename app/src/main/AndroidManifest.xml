@@ -34,7 +34,7 @@
         <activity android:name=".ForgotPasswordActivity"/>
         <activity android:name=".MyRewardsActivity"/>
         <activity android:name=".games.dice.DiceActivity"/>
-        <activity android:name=".games.tictactoe.TicTacToeActivity"/>
+        <activity android:name=".games.tictactoe.NewTicTacToeActivity"/>
         <activity android:name=".RedeemActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity

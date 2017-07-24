@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mobilemauj.rewards.interfaces.ServerTimeAsyncResponse;
 import com.mobilemauj.rewards.utility.Constants;
+import com.mobilemauj.rewards.utility.LogUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.Utils;
 import java.io.IOException;
@@ -61,6 +62,7 @@ public class SplashActivity extends Activity implements ServerTimeAsyncResponse 
     @Override
     public void processFinish(String result) {
         try {
+            LogUtil.d("save time "+result);
             PrefUtils.saveLongToPrefs(this, Constants.SERVER_TIME, Long.parseLong(result));
             gotoMain();
         } catch (Exception e){

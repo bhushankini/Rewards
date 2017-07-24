@@ -35,6 +35,9 @@ public class Utils {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
         Date d1 = new Date(lastOpenTime);
         Date d2 = new Date(serverTime*1000);
+        LogUtil.d("Date1 "+d1.toString());
+
+        LogUtil.d("Date2 "+d2.toString());
         return !fmt.format(d1).equals(fmt.format(d2));
     }
 

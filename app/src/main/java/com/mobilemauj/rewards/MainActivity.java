@@ -24,6 +24,7 @@ import com.mobilemauj.rewards.fragments.HistoryFragment;
 import com.mobilemauj.rewards.fragments.LeaderBoardFragment;
 import com.mobilemauj.rewards.fragments.RewardsFragment;
 import com.mobilemauj.rewards.fragments.VideoFragment;
+import com.mobilemauj.rewards.games.dice.DiceActivity;
 import com.mobilemauj.rewards.model.Statistics;
 import com.mobilemauj.rewards.model.User;
 import com.mobilemauj.rewards.utility.Constants;
@@ -34,9 +35,8 @@ import com.mobilemauj.rewards.utility.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private static final String TAG = "Rewards" ;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void addPointsChangeListener() {
         // User data change listener
+        showProgressDialog();
         mFirebaseUserDatabase.child(Utils.getUserId(MainActivity.this)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -135,19 +136,21 @@ public class MainActivity extends AppCompatActivity {
                 PrefUtils.saveLongToPrefs(MainActivity.this, Constants.LAST_DAILY_REWARD,user.getLastopen());
                 PrefUtils.saveStringToPrefs(MainActivity.this, Constants.USER_NAME,user.getName());
 
-                boolean isNewDay = Utils.isNewDate(user.getLastopen(),PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME,user.getLastopen()));
+             //   boolean isNewDay = Utils.isNewDate(user.getLastopen(),PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME,user.getLastopen()));
 
-                Log.e("KHUSHI", "KHUSHI is new Day " + isNewDay);
+            //    Log.e("KHUSHI", "KHUSHI is new Day " + isNewDay);
 
            //     PrefUtils.saveToPrefs(MainActivity.this, Constants.USER_ID, user.getUserId());
                 txtPoints.setText(" " + user.getPoints() + "  ");
                 Log.e("KHUSHI", "KHUSHI last open " + user.getLastopen());
+                hideProgressDialog();
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.e("KHUSHI", "Failed to read user", error.toException());
+                hideProgressDialog();
             }
         });
     }
@@ -161,11 +164,22 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user value
                         Statistics stats = dataSnapshot.getValue(Statistics.class);
+                        Log.d("TAGA","BHUSHAN stastss ");
+                        long time = PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME, stats.getLastplayed());
+                        Log.d("TAGA","BHUSHAN stastss time "+time);
                         LogUtil.d(stats.toString());
+                        LogUtil.d("LAst Palyed "+stats.getLastplayed());
+                        LogUtil.d("Server time "+time);
+                        LogUtil.e("Game DATA");
                         boolean isNewDay = Utils.isNewDate(stats.getLastplayed(),PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME, stats.getLastplayed()));
+
+                        LogUtil.e("IS NEW DAY "+isNewDay);
                         if(isNewDay) {
+                            LogUtil.e("Game reset data");
                             mFirebaseStatisticsDatabase.child(userId).child("dice").setValue(0);
                             mFirebaseStatisticsDatabase.child(userId).child("tictactoe").setValue(0);
+                            PrefUtils.saveIntToPrefs(MainActivity.this,Constants.DICE_COUNT, 0);
+                            PrefUtils.saveIntToPrefs(MainActivity.this,Constants.TTT_COUNT, 0);
                         }
                     }
 
