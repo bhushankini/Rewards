@@ -39,6 +39,7 @@
     <string name="to_recipient">To : %s</string>
     <string name="already_claimed">Already claimed. Check back tomorrow</string>
     <string name="video_not_ready">Video not ready</string>
+    <string name="rewards_loading">Wait. We are loading your rewards...</string>
 
     <string name="pending">Pending</string>
     <string name="completed">Completed On</string>
@@ -46,6 +47,9 @@
     <string name="mobile_hint">Enter Mobile Number</string>
     <string name="email_hint">Enter Email</string>
     <string name="no_network">No Network. Check you internet</string>
+
+    <string name="facebook_post_msg">Post on your facebook wall and get 50 points</string>
+
 
     <!--TIC-TAC-TOE -->
 

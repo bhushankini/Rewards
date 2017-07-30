@@ -93,12 +93,12 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        btnShare = (Button) view.findViewById(R.id.btnShare);
+        btnShare = (Button) view.findViewById(R.id.btnFbpost);
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
               //  share();
-                shareonFB(getActivity());
+               // startActivity(new Intent(getActivity(),FBWallPostActivity.class));
 
             }
         });

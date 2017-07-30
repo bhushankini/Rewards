@@ -1,258 +1,152 @@
 <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#E5E7E9">
-
-
-
     <RelativeLayout
-        android:id="@+id/rl_dailyreward"
-        android:background="@drawable/relative_layout_background"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_margin="5dp"
-        >
+        android:layout_height="wrap_content"
+        android:background="#E5E7E9">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl_video_bonus"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@mipmap/daily_reward_logo"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:background="@mipmap/ic_video_bonus"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:layout_height="90dp">
 
-            <ImageView
-                android:id="@+id/ic_coin"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_vertical"
-             />
-        </LinearLayout>
+            <Button
+                android:id="@+id/btnVideoBonus"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
 
+                android:layout_margin="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/button_background"
+                android:textColor="@color/white"
+                android:enabled="false"
+                android:text="@string/claim"
+                />
+        </RelativeLayout>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_dice"
-        android:background="@drawable/relative_layout_background"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/rl_dailyreward"
-        android:padding="1dp"
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl_admob"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@mipmap/rolldice_logo"
+            android:layout_below="@id/rl_video_bonus"
+            android:layout_height="90dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/relative_layout_background"
+            android:padding="5dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btnAdmob"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:background="@mipmap/admob_logo"/>
 
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/watch_earn"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnAdmob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@mipmap/ic_videoa"
+                android:text="@string/watch"
+                android:theme="@style/WatchButton" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_tictactoe"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/relative_layout_background"
-        android:layout_below="@+id/rl_dice"
-        android:padding="1dp"
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl_vungle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@mipmap/tictactoe_logo"
-            android:layout_alignBottom="@+id/btnTicTacToe"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-            <ImageView
-                android:visibility="gone"
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-                android:background="@mipmap/tictactoe_logo"/>
-
-            <TextView
-                android:layout_width="200dp"
-                android:visibility="gone"
+            android:layout_height="90dp"
+            android:layout_below="@+id/rl_admob"
+            android:layout_margin="5dp"
+            android:background="@drawable/relative_layout_background"
+            android:padding="5dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/tictactoe_earn"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnTicTacToe"
-            android:theme="@style/WatchButton"
-            android:text="@string/play"
-            android:visibility="gone"
-            android:drawableLeft="@mipmap/ic_videoa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+                android:layout_alignBottom="@+id/btnVungle"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:background="@mipmap/vungle_logo"/>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_applovin"
-        android:background="@drawable/relative_layout_background"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_below="@+id/rl_tictactoe"
-        android:padding="5dp"
-
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignTop="@+id/btnAppLovin">
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-                android:background="@mipmap/applovin_logo"/>
-
-            <TextView
-                android:layout_width="200dp"
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/watch_earn"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnVungle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/watch_earn"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnAppLovin"
-            android:theme="@style/WatchButton"
-            android:text="@string/watch"
-            android:drawableLeft="@mipmap/ic_videoa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@mipmap/ic_videoa"
+                android:text="@string/watch"
+                android:theme="@style/WatchButton" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_admob"
-        android:background="@drawable/relative_layout_background"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_below="@+id/rl_applovin"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignBottom="@+id/btnAdmob"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-                android:background="@mipmap/admob_logo"/>
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/watch_earn"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnAdmob"
-            android:theme="@style/WatchButton"
-            android:text="@string/watch"
-            android:drawableLeft="@mipmap/ic_videoa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_vungle"
-        android:background="@drawable/relative_layout_background"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_below="@+id/rl_admob"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignBottom="@+id/btnVungle"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-                android:background="@mipmap/vungle_logo"/>
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/watch_earn"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnVungle"
-            android:theme="@style/WatchButton"
-            android:text="@string/watch"
-            android:drawableLeft="@mipmap/ic_videoa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_fbpost"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/relative_layout_background"
-
-        android:layout_below="@+id/rl_vungle"
-        android:padding="1dp"
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_applovin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@mipmap/share_logo"
+            android:layout_height="90dp"
+            android:layout_below="@+id/rl_vungle"
+            android:layout_margin="5dp"
+            android:background="@drawable/relative_layout_background"
 
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-            <ImageView
-                android:visibility="gone"
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-               />
-
-            <TextView
-                android:layout_width="200dp"
-                android:visibility="gone"
+            android:padding="5dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/tictactoe_earn"/>
-        </LinearLayout>
+                android:layout_alignTop="@+id/btnAppLovin"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:background="@mipmap/applovin_logo"/>
 
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/watch_earn"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnAppLovin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@mipmap/ic_videoa"
+                android:text="@string/watch"
+                android:theme="@style/WatchButton" />
+
+        </RelativeLayout>
     </RelativeLayout>
-
-</RelativeLayout>
 </ScrollView>

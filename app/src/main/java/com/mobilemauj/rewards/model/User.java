@@ -15,6 +15,7 @@ public class User {
 
     public static final String FIREBASE_USER_ROOT = "users";
     public static final String FIREBASE_USER_CHILD_POINT = "points";
+    public static final String FIREBASE_USER_VIDEO_COUNT = "video_count";
     public static final String FIREBASE_USER_CHILD_LIFETIME_POINT = "lifetime_points";
     private String country;
     // Default constructor required for calls to

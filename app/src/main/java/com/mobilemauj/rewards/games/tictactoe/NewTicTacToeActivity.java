@@ -2,6 +2,9 @@ package com.mobilemauj.rewards.games.tictactoe;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +21,7 @@ import com.mobilemauj.rewards.utility.FirebaseDatabaseUtil;
 import com.mobilemauj.rewards.utility.LogUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
 
-public class NewTicTacToeActivity extends Activity {
+public class NewTicTacToeActivity extends AppCompatActivity {
 
     // Represents the internal state of the game
     private TicTacToeGame mGame;
@@ -31,9 +34,7 @@ public class NewTicTacToeActivity extends Activity {
     private TextView mInfoTextView;
 
     // Counters for the wins and ties
-    private int mPlayerOneCounter = 0;
-    private int mTieCounter = 0;
-    private int mPlayerTwoCounter = 0;
+
     private int gameCount = 0;
     // Bools needed to see if player one goes first
     // if the gameType is to be single or local multiplayer
@@ -56,6 +57,14 @@ public class NewTicTacToeActivity extends Activity {
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_newtictactoe);
 
+
+        final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle(getString(R.string.tic_tac_toe));
+        }
         // Initialize the buttons
         mBoardButtons = new Button[mGame.getBOARD_SIZE()];
         mBoardButtons[0] = (Button) findViewById(R.id.one);
@@ -148,6 +157,17 @@ public class NewTicTacToeActivity extends Activity {
             mBoardButtons[location].setBackgroundDrawable(getResources().getDrawable(R.drawable.o));
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    
     private void gameCount(final boolean updateCount, final boolean recordTxn) {
         final int localCount = PrefUtils.getIntFromPrefs(this, Constants.TTT_COUNT, 0);
         mInfoTextView.setText("You have " + (3 - localCount) + " tictactoe games");
@@ -232,21 +252,17 @@ public class NewTicTacToeActivity extends Activity {
                             mInfoTextView.setText(R.string.turn_human);
                         else if (winner == 1) {
                             mInfoTextView.setText(R.string.result_tie);
-                            mTieCounter++;
                             mGameOver = true;
                             gameCount(true, false);
                         } else if (winner == 2) {
                             mInfoTextView.setText(R.string.result_human_wins);
-                            mPlayerOneCounter++;
                             mGameOver = true;
                             gameCount(true, true);
                         } else {
-                            mPlayerTwoCounter++;
                             mGameOver = true;
                             gameCount(true, false);
                         }
                     }
-
                 }
             }
         }

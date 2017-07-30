@@ -31,13 +31,10 @@ public class Utils {
 
 
     public static boolean isNewDate(long lastOpenTime, long serverTime) {
-
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        //fmt.setTimeZone(TimeZone.getTimeZone("IST"));
         Date d1 = new Date(lastOpenTime);
-        Date d2 = new Date(serverTime*1000);
-        LogUtil.d("Date1 "+d1.toString());
-
-        LogUtil.d("Date2 "+d2.toString());
+        Date d2 = new Date(serverTime * 1000);
         return !fmt.format(d1).equals(fmt.format(d2));
     }
 
@@ -45,18 +42,18 @@ public class Utils {
         return PrefUtils.getStringFromPrefs(context, Constants.USER_ID, "GUEST");
     }
 
-    public static String getCountryCode(Context context){
+    public static String getCountryCode(Context context) {
         String countryCode = "";
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        if(tm != null ) {
+        if (tm != null) {
             countryCode = tm.getNetworkCountryIso();
             if (countryCode.length() > 0) {
                 return countryCode.toUpperCase();
             }
         }
         countryCode = Locale.getDefault().getCountry();
-        if(countryCode.length() > 0){
-            return  countryCode.toUpperCase();
+        if (countryCode.length() > 0) {
+            return countryCode.toUpperCase();
         }
         return countryCode;
     }
@@ -71,24 +68,27 @@ public class Utils {
     public static String encryptData(String input) {
 
         String result = "";
-        for(int i=0; i < input.length();i++){
-            result = result + String.valueOf( (char) (input.charAt(i) + 1));
+        for (int i = 0; i < input.length(); i++) {
+            result = result + String.valueOf((char) (input.charAt(i) + 1));
         }
-       return result;
+        return result;
     }
 
     public static String decryptData(String input) {
         String result = "";
-        for(int i=0; i < input.length();i++){
-            result = result + String.valueOf( (char) (input.charAt(i) - 1));
+        for (int i = 0; i < input.length(); i++) {
+            result = result + String.valueOf((char) (input.charAt(i) - 1));
         }
         return result;
     }
 
     public static Drawable getCoinIcon(Context context) {
-        String country = PrefUtils.getStringFromPrefs(context, Constants.USER_COUNTRY,"in").toLowerCase();
-         return  context.getResources().getDrawable(context.getResources()
-                .getIdentifier("ic_coin_"+country, "mipmap", context.getPackageName()));
+        String country = PrefUtils.getStringFromPrefs(context, Constants.USER_COUNTRY, "in").toLowerCase();
+      //  return context.getResources().getDrawable(context.getResources()
+      //          .getIdentifier("ic_coin_" + country, "mipmap", context.getPackageName()));
+        return context.getResources().getDrawable(context.getResources()
+                .getIdentifier("ic_coin_" + "in", "mipmap", context.getPackageName()));
 
     }
+
 }

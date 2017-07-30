@@ -1,0 +1,141 @@
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E5E7E9">
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_dailyreward"
+        android:background="@drawable/relative_layout_background"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@mipmap/daily_reward_logo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:id="@+id/ic_coin"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+             />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_dice"
+        android:background="@drawable/relative_layout_background"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/rl_dailyreward"
+        android:padding="1dp"
+        android:layout_margin="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@mipmap/rolldice_logo"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_tictactoe"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/relative_layout_background"
+        android:layout_below="@+id/rl_dice"
+        android:padding="1dp"
+        android:layout_margin="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@mipmap/tictactoe_logo"
+            android:layout_alignBottom="@+id/btnTicTacToe"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/tictactoe_logo"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/tictactoe_earn"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnTicTacToe"
+            android:theme="@style/WatchButton"
+            android:text="@string/play"
+            android:visibility="gone"
+            android:drawableLeft="@mipmap/ic_videoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_share"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/relative_layout_background"
+
+        android:layout_below="@+id/rl_tictactoe"
+        android:padding="1dp"
+        android:layout_margin="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@mipmap/share_logo"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+               />
+
+            <TextView
+                android:layout_width="200dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/tictactoe_earn"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+</ScrollView>

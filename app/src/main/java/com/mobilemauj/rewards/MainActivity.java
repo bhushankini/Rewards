@@ -6,25 +6,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.fragments.AccountFragment;
+import com.mobilemauj.rewards.fragments.GamesFragment;
 import com.mobilemauj.rewards.fragments.HistoryFragment;
 import com.mobilemauj.rewards.fragments.LeaderBoardFragment;
 import com.mobilemauj.rewards.fragments.RewardsFragment;
 import com.mobilemauj.rewards.fragments.VideoFragment;
-import com.mobilemauj.rewards.games.dice.DiceActivity;
 import com.mobilemauj.rewards.model.Statistics;
 import com.mobilemauj.rewards.model.User;
 import com.mobilemauj.rewards.utility.Constants;
@@ -32,6 +32,7 @@ import com.mobilemauj.rewards.utility.LogUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.ShortURL;
 import com.mobilemauj.rewards.utility.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class MainActivity extends BaseActivity {
                 checkConnection();
             }
         });
-
+        MobileAds.initialize(this, Constants.ADMOB_APP_ID);
         txtPoints = (TextView) findViewById(R.id.toolbar_points);
         imgCoinIcon = (ImageView) findViewById(R.id.ic_coin);
         imgCoinIcon.setBackground(Utils.getCoinIcon(this));
@@ -101,7 +102,8 @@ public class MainActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new VideoFragment(), "Earn");
+        adapter.addFrag(new GamesFragment(), "Games");
+        adapter.addFrag(new VideoFragment(), "Videos");
         adapter.addFrag(new RewardsFragment(), "Rewards");
         adapter.addFrag(new LeaderBoardFragment(), "Leaderboard");
         adapter.addFrag(new HistoryFragment(), "History");
@@ -136,20 +138,14 @@ public class MainActivity extends BaseActivity {
                 PrefUtils.saveLongToPrefs(MainActivity.this, Constants.LAST_DAILY_REWARD,user.getLastopen());
                 PrefUtils.saveStringToPrefs(MainActivity.this, Constants.USER_NAME,user.getName());
 
-             //   boolean isNewDay = Utils.isNewDate(user.getLastopen(),PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME,user.getLastopen()));
-
-            //    Log.e("KHUSHI", "KHUSHI is new Day " + isNewDay);
-
-           //     PrefUtils.saveToPrefs(MainActivity.this, Constants.USER_ID, user.getUserId());
                 txtPoints.setText(" " + user.getPoints() + "  ");
-                Log.e("KHUSHI", "KHUSHI last open " + user.getLastopen());
+                LogUtil.e("last open "+user.getLastopen());
                 hideProgressDialog();
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.e("KHUSHI", "Failed to read user", error.toException());
                 hideProgressDialog();
             }
         });
@@ -164,18 +160,10 @@ public class MainActivity extends BaseActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user value
                         Statistics stats = dataSnapshot.getValue(Statistics.class);
-                        Log.d("TAGA","BHUSHAN stastss ");
                         long time = PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME, stats.getLastplayed());
-                        Log.d("TAGA","BHUSHAN stastss time "+time);
-                        LogUtil.d(stats.toString());
-                        LogUtil.d("LAst Palyed "+stats.getLastplayed());
-                        LogUtil.d("Server time "+time);
-                        LogUtil.e("Game DATA");
                         boolean isNewDay = Utils.isNewDate(stats.getLastplayed(),PrefUtils.getLongFromPrefs(MainActivity.this,Constants.SERVER_TIME, stats.getLastplayed()));
 
-                        LogUtil.e("IS NEW DAY "+isNewDay);
                         if(isNewDay) {
-                            LogUtil.e("Game reset data");
                             mFirebaseStatisticsDatabase.child(userId).child("dice").setValue(0);
                             mFirebaseStatisticsDatabase.child(userId).child("tictactoe").setValue(0);
                             PrefUtils.saveIntToPrefs(MainActivity.this,Constants.DICE_COUNT, 0);

@@ -6,6 +6,7 @@ public class Constants {
     public static final String ADMOB_APP_ID = "ca-app-pub-5302069989228488~6507764654";//mm
 
 
+
     public static final String ADMOB_DAILY_REWARD_AD_UNIT_ID = "ca-app-pub-5302069989228488/9143173454"; //mm daily reward
     public static final String ADMOB_DAILY_REWARD_APP_ID = "ca-app-pub-5302069989228488~6507764654";//mm daily reward
 

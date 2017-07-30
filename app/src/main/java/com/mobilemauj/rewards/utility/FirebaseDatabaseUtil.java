@@ -1,13 +1,12 @@
 package com.mobilemauj.rewards.utility;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.model.User;
@@ -15,8 +14,6 @@ import com.mobilemauj.rewards.model.UserTransaction;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class FirebaseDatabaseUtil {
-
-private final static String TAG = "FirebaseDatabaseUtil";
 
     public static void rewardsPoints(Context context, final int points, final String source, final String type) {
         final Context ctx = context;
@@ -26,7 +23,6 @@ private final static String TAG = "FirebaseDatabaseUtil";
         mFirebaseUserDatabase.child(userId).child(User.FIREBASE_USER_CHILD_POINT).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "KHUSHI snapshot " + dataSnapshot.getValue());
                 if (dataSnapshot.getValue() != null) {
                     long totalPoints = (long) dataSnapshot.getValue();
                     mFirebaseUserDatabase.child(userId).child(User.FIREBASE_USER_CHILD_POINT).setValue(totalPoints + points);
@@ -57,5 +53,34 @@ private final static String TAG = "FirebaseDatabaseUtil";
                 .show();
 
   // Toast.makeText(context, "Congratulations you got "+points+ " points",Toast.LENGTH_LONG).show();
+    }
+
+
+    public static void incrementVideoCounter(Context context,final boolean resetCounter) {
+        final String userId = Utils.getUserId(context);
+        final DatabaseReference mFirebaseUserDatabase = FirebaseDatabase.getInstance().getReference().child(User.FIREBASE_USER_ROOT).child(userId).child(User.FIREBASE_USER_VIDEO_COUNT);
+
+        mFirebaseUserDatabase.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(final MutableData currentData) {
+                if(!resetCounter) {
+                    if (currentData.getValue() == null) {
+                        currentData.setValue(1);
+                    } else {
+                        currentData.setValue((Long) currentData.getValue() + 1);
+                    }
+                } else {
+                    currentData.setValue((Long) currentData.getValue() - 100);
+                }
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                if (databaseError != null) {
+                    LogUtil.e("Database failure.");
+                }
+            }
+        });
     }
 }
