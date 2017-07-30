@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity {
         MobileAds.initialize(this, Constants.ADMOB_APP_ID);
         txtPoints = (TextView) findViewById(R.id.toolbar_points);
         imgCoinIcon = (ImageView) findViewById(R.id.ic_coin);
-        imgCoinIcon.setBackground(Utils.getCoinIcon(this));
+        imgCoinIcon.setBackground(getResources().getDrawable(R.mipmap.ic_coin_in));
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseUserDatabase = mFirebaseInstance.getReference(User.FIREBASE_USER_ROOT);
         mFirebaseStatisticsDatabase = mFirebaseInstance.getReference(Statistics.FIREBASE_STATISTICS_ROOT);
@@ -102,12 +102,12 @@ public class MainActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new GamesFragment(), "Games");
-        adapter.addFrag(new VideoFragment(), "Videos");
-        adapter.addFrag(new RewardsFragment(), "Rewards");
-        adapter.addFrag(new LeaderBoardFragment(), "Leaderboard");
-        adapter.addFrag(new HistoryFragment(), "History");
-        adapter.addFrag(new AccountFragment(), "Account");
+        adapter.addFrag(new GamesFragment(), getString(R.string.games));
+        adapter.addFrag(new VideoFragment(), getString(R.string.videos));
+        adapter.addFrag(new RewardsFragment(), getString(R.string.rewards));
+        adapter.addFrag(new LeaderBoardFragment(), getString(R.string.leaderboard));
+        adapter.addFrag(new HistoryFragment(), getString(R.string.history));
+        adapter.addFrag(new AccountFragment(), getString(R.string.account));
         viewPager.setAdapter(adapter);
     }
 

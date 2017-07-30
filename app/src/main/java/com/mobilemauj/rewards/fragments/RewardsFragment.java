@@ -48,7 +48,8 @@ public class RewardsFragment extends Fragment {
     }
 
     private void getRewardsList() {
-        String countryCode = PrefUtils.getStringFromPrefs(getActivity(), Constants.USER_COUNTRY,"IN");
+     //   String countryCode = PrefUtils.getStringFromPrefs(getActivity(), Constants.USER_COUNTRY,"IN");
+        String countryCode = "IN" ;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Rewards.FIREBASE_REWARDS_ROOT);
         ref.orderByChild("country").equalTo(countryCode).addValueEventListener(new ValueEventListener() {
 

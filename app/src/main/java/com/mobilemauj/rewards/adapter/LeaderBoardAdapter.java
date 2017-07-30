@@ -19,7 +19,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
     private ArrayList<User> dataSet;
     private Context context;
-    private Drawable icCoin;
+   // private Drawable icCoin;
 
     public static class LeaderBoardViewHolder extends RecyclerView.ViewHolder {
 
@@ -51,7 +51,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                                                 int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_leaderboard, parent, false);
-        icCoin = Utils.getCoinIcon(context);
+       // icCoin = Utils.getCoinIcon(context);
         return new LeaderBoardViewHolder(view);
     }
 
@@ -67,7 +67,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         txtPoints.setText(""+dataSet.get(listPosition).getPoints());
         txtRank.setText("#"+(listPosition+1));
         Picasso.with(context).load(dataSet.get(listPosition).getPhotoUrl()).placeholder(R.drawable.user_icon).into(imgProfile);
-        imgCoin.setImageDrawable(icCoin);
+        imgCoin.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_coin_in));
 
     }
 

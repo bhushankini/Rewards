@@ -50,6 +50,13 @@
 
     <string name="facebook_post_msg">Post on your facebook wall and get 50 points</string>
 
+<!--Page titles-->
+    <string name="games">Games</string>
+    <string name="videos">Videos</string>
+    <string name="rewards">Rewards</string>
+    <string name="leaderboard">LeaderBoard</string>
+    <string name="history">History</string>
+    <string name="account">Account</string>
 
     <!--TIC-TAC-TOE -->
 

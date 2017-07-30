@@ -42,7 +42,7 @@ public class Utils {
         return PrefUtils.getStringFromPrefs(context, Constants.USER_ID, "GUEST");
     }
 
-    public static String getCountryCode(Context context) {
+    private static String getCountryCode(Context context) {
         String countryCode = "";
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (tm != null) {
@@ -82,7 +82,7 @@ public class Utils {
         return result;
     }
 
-    public static Drawable getCoinIcon(Context context) {
+    private static Drawable getCoinIcon(Context context) {
         String country = PrefUtils.getStringFromPrefs(context, Constants.USER_COUNTRY, "in").toLowerCase();
       //  return context.getResources().getDrawable(context.getResources()
       //          .getIdentifier("ic_coin_" + country, "mipmap", context.getPackageName()));

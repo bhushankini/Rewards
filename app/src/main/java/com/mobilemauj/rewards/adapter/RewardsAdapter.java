@@ -25,7 +25,6 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
 
     private ArrayList<Rewards> dataSet;
     private Context context;
-    private Drawable icCoin;
 
     public RewardsAdapter(Context context, ArrayList<Rewards> data) {
         this.dataSet = data;
@@ -37,7 +36,6 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
                                                 int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_rewards, parent, false);
-        icCoin = Utils.getCoinIcon(context);
         return new RewardsViewHolder(view);
     }
 
@@ -53,7 +51,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
             txtDisplay.setText(dataSet.get(listPosition).getDisplay());
             txtValue.setText("" + dataSet.get(listPosition).getValue());
             String url = Rewards.IMAGES_BASE_URL + dataSet.get(listPosition).getBrand().toLowerCase() + "_small.png";
-            imgCoin.setBackground(icCoin);
+            imgCoin.setBackground(context.getResources().getDrawable(R.mipmap.ic_coin_in));
             Picasso.with(context).load(url).into(imgReward);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

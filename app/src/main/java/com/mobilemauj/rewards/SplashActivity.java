@@ -28,11 +28,12 @@ public class SplashActivity extends Activity implements ServerTimeAsyncResponse 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        country = PrefUtils.getStringFromPrefs(this, Constants.USER_COUNTRY,"");
+       /* country = PrefUtils.getStringFromPrefs(this, Constants.USER_COUNTRY,"");
         if(country.length()==0){
             country = Utils.getCountryCode(this);
             PrefUtils.saveStringToPrefs(this,Constants.USER_COUNTRY,country);
         }
+        */
         mAuth = FirebaseAuth.getInstance();
         if(Utils.isNetworkAvailable(this)) {
             new Handler().postDelayed(new Runnable() {

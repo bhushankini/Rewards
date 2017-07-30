@@ -33,9 +33,8 @@ public class GamesFragment extends Fragment implements View.OnClickListener {
 
     private RelativeLayout rlDice;
     private RelativeLayout rlTicTacToe;
-    private RelativeLayout rlFBpost;
     private RelativeLayout rlDailyReward;
-    private Drawable icCoin;
+
     private ImageView imgCoin;
     private CallbackManager callbackManager;
 
@@ -55,7 +54,6 @@ public class GamesFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        icCoin = Utils.getCoinIcon(getActivity());
 
         final View view = inflater.inflate(R.layout.fragment_game, container, false);
         rlDailyReward = (RelativeLayout) view.findViewById(R.id.rl_dailyreward);
@@ -66,8 +64,7 @@ public class GamesFragment extends Fragment implements View.OnClickListener {
         rlTicTacToe.setOnClickListener(this);
 
         imgCoin = (ImageView) view.findViewById(R.id.ic_coin);
-        imgCoin.setImageDrawable(icCoin);
-
+        imgCoin.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.ic_coin_in));
         return view;
     }
 
