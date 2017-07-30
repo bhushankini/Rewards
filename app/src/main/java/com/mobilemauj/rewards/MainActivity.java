@@ -152,7 +152,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    void addGameStatisticListener(){
+    private void addGameStatisticListener(){
         final String userId = Utils.getUserId(this);
         mFirebaseStatisticsDatabase.child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {

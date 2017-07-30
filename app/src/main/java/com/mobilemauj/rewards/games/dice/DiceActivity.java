@@ -20,14 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.model.Statistics;
 import com.mobilemauj.rewards.model.User;
-import com.mobilemauj.rewards.model.UserTransaction;
 import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.FirebaseDatabaseUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
 import com.mobilemauj.rewards.utility.Utils;
-
 import java.util.Random;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class DiceActivity extends AppCompatActivity {
 
@@ -40,9 +37,8 @@ public class DiceActivity extends AppCompatActivity {
     private boolean diceTwoStatus = false;
     private int gameCount = 0;
 
-    private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mFirebaseUserDatabase;
-    private DatabaseReference mFirebaseTransactionDatabase;
+   // private DatabaseReference mFirebaseTransactionDatabase;
     private DatabaseReference mFirebaseStatsticsDatabase;
 
     @Override
@@ -54,9 +50,9 @@ public class DiceActivity extends AppCompatActivity {
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         txtMessage = (TextView) findViewById(R.id.txtMessage);
 
-        mFirebaseInstance = FirebaseDatabase.getInstance();
+        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseUserDatabase = mFirebaseInstance.getReference(User.FIREBASE_USER_ROOT);
-        mFirebaseTransactionDatabase = mFirebaseInstance.getReference(UserTransaction.FIREBASE_TRANSACTION_ROOT);
+     //   mFirebaseTransactionDatabase = mFirebaseInstance.getReference(UserTransaction.FIREBASE_TRANSACTION_ROOT);
         mFirebaseStatsticsDatabase = mFirebaseInstance.getReference(Statistics.FIREBASE_STATISTICS_ROOT);
 
         final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);

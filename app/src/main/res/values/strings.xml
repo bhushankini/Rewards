@@ -39,7 +39,7 @@
     <string name="to_recipient">To : %s</string>
     <string name="already_claimed">Already claimed. Check back tomorrow</string>
     <string name="video_not_ready">Video not ready</string>
-    <string name="rewards_loading">Wait. We are loading your rewards...</string>
+    <string name="rewards_loading">Wait. We are loading your rewards &#8239;</string>
 
     <string name="pending">Pending</string>
     <string name="completed">Completed On</string>

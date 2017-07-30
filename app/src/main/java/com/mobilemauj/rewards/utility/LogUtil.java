@@ -2,9 +2,6 @@ package com.mobilemauj.rewards.utility;
 
 import android.util.Log;
 
-/**
- * Created by bkini on 7/16/17.
- */
 
 public class LogUtil {
 

@@ -1,6 +1,5 @@
 package com.mobilemauj.rewards.games.tictactoe;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +17,6 @@ import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.model.Statistics;
 import com.mobilemauj.rewards.utility.Constants;
 import com.mobilemauj.rewards.utility.FirebaseDatabaseUtil;
-import com.mobilemauj.rewards.utility.LogUtil;
 import com.mobilemauj.rewards.utility.PrefUtils;
 
 public class NewTicTacToeActivity extends AppCompatActivity {

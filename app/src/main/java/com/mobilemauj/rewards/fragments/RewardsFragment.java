@@ -17,9 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.adapter.RewardsAdapter;
 import com.mobilemauj.rewards.model.Rewards;
-import com.mobilemauj.rewards.utility.Constants;
-import com.mobilemauj.rewards.utility.PrefUtils;
-
 import java.util.ArrayList;
 
 public class RewardsFragment extends Fragment {

@@ -1,7 +1,6 @@
 package com.mobilemauj.rewards.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.model.User;
-import com.mobilemauj.rewards.utility.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

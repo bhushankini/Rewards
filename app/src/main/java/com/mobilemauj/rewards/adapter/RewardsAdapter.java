@@ -2,7 +2,6 @@ package com.mobilemauj.rewards.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,16 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.mobilemauj.rewards.R;
 import com.mobilemauj.rewards.RedeemActivity;
 import com.mobilemauj.rewards.model.Rewards;
-import com.mobilemauj.rewards.utility.Utils;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
-import okhttp3.internal.Util;
 
 public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsViewHolder> {
 
